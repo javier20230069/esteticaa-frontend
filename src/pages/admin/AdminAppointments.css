@@ -1,0 +1,45 @@
+/* src/pages/admin/AdminAppointments.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+.dashboard-clean-container { font-family: 'Inter', system-ui, sans-serif; padding: 28px 32px; max-width: 1200px; margin: 0 auto; animation: fade-up .38s ease-out; }
+@keyframes fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.dashboard-header-section { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #e2e8f0; }
+.dashboard-header-section::before { content: 'GESTIÓN DE AGENDA'; display: block; font-size: .8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #8b5cf6; margin-bottom: 6px; }
+.dashboard-header-section h2 { font-size: 2rem; font-weight: 800; color: #0f172a; margin: 0 0 4px; letter-spacing: -.5px; line-height: 1.1; }
+.dashboard-header-section p { font-size: 1rem; color: #64748b; font-weight: 400; margin: 0; }
+
+.white-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,.02); }
+.table-responsive { width: 100%; overflow-x: auto; }
+.admin-table { width: 100%; border-collapse: collapse; white-space: nowrap; font-family: 'Inter', sans-serif; }
+.admin-table th { background: #f8fafc; color: #64748b; font-size: .75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 16px 20px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+.admin-table td { padding: 16px 20px; border-bottom: 1px solid #f1f5f9; font-size: .9rem; color: #334155; vertical-align: middle; }
+.admin-table tbody tr:hover { background: #f8fafc; }
+.admin-table tbody tr:last-child td { border-bottom: none; }
+
+.fw-bold { font-weight: 600; color: #0f172a; }
+.text-muted { color: #64748b !important; }
+.text-indigo { color: #4f46e5 !important; }
+.text-emerald { color: #10b981 !important; }
+
+.row-highlight { background: #fefce8 !important; border-left: 4px solid #f59e0b; }
+.row-highlight:hover { background: #fef9c3 !important; }
+
+.badge-status { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 20px; font-size: .75rem; font-weight: 700; }
+.badge-warning { background: #fefce8; color: #d97706; border: 1px solid rgba(245,158,11,.2); }
+.badge-success { background: #dcfce7; color: #15803d; border: 1px solid rgba(21,128,61,.2); }
+.badge-error { background: #fee2e2; color: #dc2626; border: 1px solid rgba(220,38,38,.2); }
+.badge-gray { background: #f1f5f9; color: #475569; border: 1px solid rgba(100,116,139,.2); }
+
+.action-buttons { display: flex; align-items: center; gap: 8px; }
+.btn-icon { background: transparent; border: none; cursor: pointer; padding: 6px; border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+.btn-icon:hover { background: #f1f5f9; }
+.btn-icon.text-emerald { color: #10b981; }
+.btn-icon.text-emerald:hover { background: #ecfdf5; border-color: rgba(16,185,129,.4); }
+.btn-icon.text-rose { color: #ef4444; }
+.btn-icon.text-rose:hover { background: #fef2f2; border-color: rgba(239,68,68,.4); }
+
+@media (max-width: 768px) {
+  .dashboard-clean-container { padding: 16px; }
+  .dashboard-header-section h2 { font-size: 1.6rem; }
+}
