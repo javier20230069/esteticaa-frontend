@@ -6,14 +6,13 @@ import toast from 'react-hot-toast';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
 import './AdminBackups.css';
 
-// 🌟 Actualizamos la interfaz para coincidir con Cloudinary
 interface Backup {
   fileName: string;
-  public_id: string; // Importante para borrar
-  url: string;       // Importante para descargar
+  public_id: string;
+  url: string;
   size: string;
   createdAt: string;
-  type: string;      // Manual o Automático
+  type: string;
 }
 
 const AdminBackups = () => {
@@ -55,9 +54,16 @@ const AdminBackups = () => {
     }
   };
 
-  // 🌟 Descarga súper rápida usando el link directo de Cloudinary
-  const handleDownload = (url: string) => {
-    window.open(url, '_blank');
+  // ✅ FIX: Usamos un <a> programático en lugar de window.open()
+  // window.open() es bloqueado como popup por los navegadores cuando el sitio está en HTTPS
+  const handleDownload = (url: string, fileName: string) => {
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const promptDelete = (public_id: string, fileName: string) => {
@@ -69,7 +75,6 @@ const AdminBackups = () => {
     if (!backupToDelete) return;
     
     try {
-      // 🌟 Ahora le mandamos el public_id por query params como lo pide nuestro backend
       await api.delete(`/backups?public_id=${backupToDelete.id}`);
       toast.success('Respaldo eliminado de la nube');
       fetchBackups();
@@ -131,10 +136,9 @@ const AdminBackups = () => {
                     {b.fileName}
                   </td>
                   <td>
-                     {/* 🌟 Mostramos si es Manual o Automático */}
-                     <span className={`badge-gray flex-cell`} style={{ width: 'fit-content' }}>
-                        <Tag size={14} /> {b.type}
-                     </span>
+                    <span className={`badge-gray flex-cell`} style={{ width: 'fit-content' }}>
+                      <Tag size={14} /> {b.type}
+                    </span>
                   </td>
                   <td className="text-muted flex-cell">
                     <Calendar size={16} />
@@ -148,8 +152,9 @@ const AdminBackups = () => {
                   </td>
                   <td>
                     <div className="action-buttons">
+                      {/* ✅ FIX: Ahora le pasamos también b.fileName para nombrar el archivo descargado */}
                       <button
-                        onClick={() => handleDownload(b.url)}
+                        onClick={() => handleDownload(b.url, b.fileName)}
                         className="btn-icon text-emerald"
                         title="Descargar archivo"
                       >
